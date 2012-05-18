@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>jquery.resizeAndCrop() plugin examples</title>
+
+  <!-- Stylesheet below needed to use Plugin -->
+  <link rel="stylesheet" type="text/css" href="../src/jquery.resizeandcrop.css"></link>
+  
+  <style>
+  /* For testing purposes: styles below not needed to use plugin */
+  .sq220 { width: 220px; height: 220px; }
+  td { padding-right: 20px; }
+  h3 { background-color: #eee; }
+  .highlight, .resize-and-crop { border: 1px dotted #faa; } /* To hilight result */
+  div.resize-and-crop img.highlight  { border: none; } /* IE6 */
+  .code { margin: 6px 0px 0px 0px; color: #161; font-family: monospace; border: 1px solid #161; background-color: #ded; padding: 8px; }
+  .param { font-family: monospace; color: #161; }
+  table.params { border-collapse: collapse; border: 1px solid #161; }
+  table.params th { background-color: #eee; border-bottom: 1px solid #161; text-align: left; padding: 0 4px; }
+  table.params td { line-height: 1.2; vertical-align: top; padding: 4px; }
+  table.params:last-child { border-bottom: 1px solid #161; }
+  </style>
+
+</head>
+<body>
+<h2>jquery.resizeAndCrop() plugin</h2>
+
+
+<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" alt="Michael Giberson" title="Michael Giberson" width="48" height="48" border="0" class="avatar avatar-48" id="avatar_987009_img"/>
+
+
+<table><tr style="vertical-align:top"><td>
+<h3>Original images resized to 96px</h3>
+<img src="http://img.tweetimag.es/i/davidlinthicum_o" height="96">
+<img src="http://img.tweetimag.es/i/lorainelawson_o" width="96" >
+<img src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96" >
+<img src="http://img.tweetimag.es/i/webbylechat_o" height="96">
+</td><td>
+<h3>Standard square resize with no plugin</h3>
+<img src="http://img.tweetimag.es/i/davidlinthicum_o" width="96" height="96">
+<img src="http://img.tweetimag.es/i/lorainelawson_o" width="96" height="96">
+<img src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
+<img src="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+</td><td>
+<h3>96x96 resize & crop & centering</h3>
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" width="96" height="96">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" width="96" height="96">
+<img class="test" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img class="test" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
+<div>Placeholder shows first then resized+cropped image replaces it.<br>
+<i>Note: 4th image is invalid (returns error message)</div>
+</td></tr></table>
+
+<table><tr style="vertical-align:top"><td>
+<h3>Same but with no placeholder</h3>
+<img class="test" src="http://img.tweetimag.es/i/davidlinthicum_o" width="96" height="96">
+<img class="test" src="http://img.tweetimag.es/i/lorainelawson_o" width="96" height="96">
+<img class="test" src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
+<img class="test" src="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<div>When no <code>realsrc</code> attribute is present, images are first displayed with standard HTML resize, then are resized and cropped.</div>
+</td><td>
+<h3>Same but with no centering</h3>
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" width="96" height="96">
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" width="96" height="96">
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
+</td></tr></table>
+
+<h3>For more realistic simulation, click on left link below</h3>
+<div>
+<a href="javascript:reload( 2000 )">Reload with simulated image load delay</a> | 
+<a href="javascript:reload( 0 )">Reload with cached images (no delay)</a>
+</div>
+
+<h3>220x220 resize & crop</h3>
+<img class="test sq220" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o">
+<img class="test sq220" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o">
+<img class="test sq220" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o">
+<div>Images smaller than placeholder don't get resized.</div>
+
+<h3>Non-square resize & crop</h3>
+<table><tr style="vertical-align:top"><td>
+<h3>4x3 ratio (horizontal)</h3>
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width: 80px; height: 60px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width: 80px; height: 60px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 60px;">
+</td><td>
+<h3>4x3 ratio (vertical)</h3>
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width: 80px; height: 120px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width: 80px; height: 120px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 120px;">
+</td></tr></table>
+
+<h3>Preserving placeholder's original size</h3>
+<img class="test2" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width:220px; height:220px;">
+<img class="test2" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width:220px; height:220px;">
+<img class="test2" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width:220px; height:220px;">
+<div>Images smaller than placeholder don't get resized but the space of the placeholder is preserved when <code>preserveSize</code> parameter is set to <code>true</code>.</div>
+
+<h3>Force image to be resized even if smaller than placeholder</h3>
+<img class="test4" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width:150px; height:150px;">
+<img class="test4" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width:150px; height:150px;">
+<img class="test4" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width:150px; height:150px;">
+<div>Images smaller than placeholder get resized if you set <code>forceResize</code> to <code>true</code>.</div>
+
+<h3>Using plugin as a simple image loader</h3>
+<img class="test3" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width: 80px; height: 80px;">
+<img class="test3" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width: 80px; height: 80px;">
+<img class="test3" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 80px;">
+<img class="test3" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" style="width: 80px; height: 80px;">
+<div>No crop happens (set <code>crop</code> to <code>false</code>). A placeholder is displayed while the real images load in the background.<br>
+<i>Note: 4th image is invalid (returns error message)</i></div>
+
+<h3>Working on hidden images</h3>
+<div><a href="javascript:void(0);" onclick="$('#hidden-images').show();">Show group of hidden images</a></div>
+<div id="hidden-images" style="display:none;">
+<img class="test5" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/davidlinthicum_o" style="width: 80px; height: 80px;">
+<img class="test5" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/lorainelawson_o" style="width: 80px; height: 80px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="48" height="48">
+<img class="test5" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" style="width: 80px; height: 80px;">
+<div>The images above should have been cropped and resized!</div>
+</div>
+
+<!-- Load jQuery and Plugin -->
+<script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="../src/jquery.resizeandcrop.js"></script>
+
+<!-- Use Plugin -->
+<script>
+// Defer call to plugin when user click on "simulation" link
+if ( m = window.location.search.match( /delay=(\d+)/ ) ) {
+  setTimeout( init, 1 * m[1] );
+} else {
+  init();
+}
+
+// Highlight image border to make crop effect more visible
+$('img').addClass( 'highlight' );
+
+// Where the plugin gets actually called...
+function init() {
+  // Using the plugin is as simple as one line
+  // --
+  // Using default config (good for most usages)
+  $("img.test").resizeAndCrop();
+  
+  // Passing some optional config paramters
+  $("img.test2").resizeAndCrop( { preserveSize: true } );
+  
+  // Use plugin to lazy load images (without cropping)
+  $("img.test3").resizeAndCrop( { crop: false } );
+  
+  // For small images to be expanded to placeholder's size
+  $("img.test4").resizeAndCrop( { forceResize: true } );
+  
+  // Set size of hidden images
+  $("img.test5").resizeAndCrop( { width: 80, height: 80 } );
+  
+  // Resize & crop, but do not center cropped images
+  $("img.nocenter").resizeAndCrop( { center: false } );
+}
+
+// Handle links to reload the page with or without simulated image-load delay
+function reload( delay ) {
+  var curUrl = window.location.href;
+  curUrl = curUrl.replace( /\?.*$/, '' ); // Strip QS
+  window.location = curUrl + '?delay=' + delay; // Redirect/reload
+}
+</script>
+</body>
