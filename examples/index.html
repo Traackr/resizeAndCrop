@@ -25,46 +25,42 @@
 <body>
 <h2>jquery.resizeAndCrop() plugin</h2>
 
-
-<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" alt="Michael Giberson" title="Michael Giberson" width="48" height="48" border="0" class="avatar avatar-48" id="avatar_987009_img"/>
-
-
 <table><tr style="vertical-align:top"><td>
 <h3>Original images resized to 96px</h3>
 <img src="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" height="96">
 <img src="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" >
 <img src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96" >
-<img src="http://img.tweetimag.es/i/webbylechat_o" height="96">
+<img src="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" height="96">
 </td><td>
 <h3>Standard square resize with no plugin</h3>
 <img src="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96">
 <img src="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
 <img src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
-<img src="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img src="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
 </td><td>
-<h3>96x96 resize & crop & centering</h3>
+<h3>With plugin: placeholder + 96x96 resize/crop + center</h3>
 <img class="test" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96">
 <img class="test" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
 <img class="test" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
-<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
 <img class="test" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
 <div>Placeholder shows first then resized+cropped image replaces it.<br>
-<i>Note: 4th image is invalid (returns error message)</div>
+<i>Note: 5th image is invalid (returns error message) and shows the placeholder</div>
 </td></tr></table>
 
 <table><tr style="vertical-align:top"><td>
-<h3>Same but with no placeholder</h3>
+<h3>With plugin: no placeholder + 96x96 resize/crop + center</h3>
 <img class="test" src="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96">
 <img class="test" src="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
 <img class="test" src="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
-<img class="test" src="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img class="test" src="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
 <div>When no <code>realsrc</code> attribute is present, images are first displayed with standard HTML resize, then are resized and cropped.</div>
 </td><td>
-<h3>Same but with no centering</h3>
+<h3>With plugin: placeholder + 96x96 resize/crop + no center</h3>
 <img class="nocenter" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96">
 <img class="nocenter" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
 <img class="nocenter" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
-<img class="nocenter" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="96" height="96">
+<img class="nocenter" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
 <img class="nocenter" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
 </td></tr></table>
 
@@ -74,10 +70,11 @@
 <a href="javascript:reload( 0 )">Reload with cached images (no delay)</a>
 </div>
 
-<h3>220x220 resize & crop</h3>
+<h3>With plugin: placeholder + 220x220 resize/crop + center</h3>
 <img class="test sq220" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg">
 <img class="test sq220" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg">
-<img class="test sq220" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o">
+<img class="test sq220" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg">
+<img class="test sq220" src="blank_avatar_220.png" realsrc="http://a0.twimg.com/profile_images/378800000139502961/57dba68ba941932eb0c81da3ac00fcbd_normal.jpeg">
 <div>Images smaller than placeholder don't get resized.</div>
 
 <h3>Non-square resize & crop</h3>
@@ -85,40 +82,40 @@
 <h3>4x3 ratio (horizontal)</h3>
 <img class="test" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width: 80px; height: 60px;">
 <img class="test" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width: 80px; height: 60px;">
-<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 60px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" style="width: 80px; height: 60px;">
 </td><td>
 <h3>4x3 ratio (vertical)</h3>
 <img class="test" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width: 80px; height: 120px;">
 <img class="test" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width: 80px; height: 120px;">
-<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 120px;">
+<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" style="width: 80px; height: 120px;">
 </td></tr></table>
 
 <h3>Preserving placeholder's original size</h3>
 <img class="test2" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width:220px; height:220px;">
 <img class="test2" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width:220px; height:220px;">
-<img class="test2" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width:220px; height:220px;">
+<img class="test2" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" style="width:220px; height:220px;">
 <div>Images smaller than placeholder don't get resized but the space of the placeholder is preserved when <code>preserveSize</code> parameter is set to <code>true</code>.</div>
 
 <h3>Force image to be resized even if smaller than placeholder</h3>
 <img class="test4" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width:150px; height:150px;">
 <img class="test4" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width:150px; height:150px;">
-<img class="test4" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width:150px; height:150px;">
+<img class="test4" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" style="width:150px; height:150px;">
 <div>Images smaller than placeholder get resized if you set <code>forceResize</code> to <code>true</code>.</div>
 
 <h3>Using plugin as a simple image loader</h3>
 <img class="test3" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width: 80px; height: 80px;">
 <img class="test3" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width: 80px; height: 80px;">
-<img class="test3" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" style="width: 80px; height: 80px;">
+<img class="test3" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" style="width: 80px; height: 80px;">
 <img class="test3" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" style="width: 80px; height: 80px;">
 <div>No crop happens (set <code>crop</code> to <code>false</code>). A placeholder is displayed while the real images load in the background.<br>
 <i>Note: 4th image is invalid (returns error message)</i></div>
 
-<h3>Working on hidden images</h3>
+<h3>It also works with hidden images</h3>
 <div><a href="javascript:void(0);" onclick="$('#hidden-images').show();">Show group of hidden images</a></div>
 <div id="hidden-images" style="display:none;">
 <img class="test5" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" style="width: 80px; height: 80px;">
 <img class="test5" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" style="width: 80px; height: 80px;">
-<img class="test" src="blank_avatar_220.png" realsrc="http://img.tweetimag.es/i/webbylechat_o" width="48" height="48">
+<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="48" height="48">
 <img class="test5" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" style="width: 80px; height: 80px;">
 <div>The images above should have been cropped and resized!</div>
 </div>

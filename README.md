@@ -2,7 +2,7 @@
 
 ## Overview
 
-**jQuery plugin** to resize and crop images on the fly, while preserving their aspect ratio. Optimized for rendering hundreds of images on the same page. A placeholder first shows and the actual image loading, cropping and resizing happens in the background.
+**jQuery plugin** to resize and crop images on the fly, while preserving their aspect ratio. A placeholder first shows and the actual image loading, cropping and resizing happens in the background. Optimized for rendering hundreds of images on the same page: images are loaded in batch with a pause in between each batch. This maximizes UI responsiveness while ensuring image loading is not blocking ajax calls.
 
 ## Plugin Usage
 
@@ -68,3 +68,15 @@ Optional class to add to the `<img>` element showing the resized and cropped ima
 ### `contClass` (string)
 
 Optional class to add to the `<div>` element that acts as a container for the `<img>` element showing the resized and cropped image. No default value.
+
+### `renderStartDelay` (integer)
+
+In milliseconds. Start loading/rendering after this initial delay. Set to zero for no delay. Default it 50ms.
+
+### `renderBatchSize` (integer)
+
+Number of images to load at once. The event loop is free'ed up after each batch to maximize UI responsiveness. Default is 10.
+
+### `renderBatchPause` (integer)
+
+In milliseconds. Pause before processing next batch of images. Important to have big enough pauses when you load large sets of images, otherwise the UI may become very unresponsive/jerky. Default is 200ms.
