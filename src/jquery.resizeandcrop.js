@@ -1,5 +1,6 @@
  /*
-  * jQuery Plugin - Resize and Crop - v0.2 - JS
+  * jQuery Plugin - Resize and Crop - v0.3 - JS
+  * Traackr / MG / Aug 27, 2013
   */
 
 (function( $ ){
@@ -33,8 +34,19 @@
       // Optional classes for resulting img element
       // and div container element
       'imgClass'     : '',
-      'contClass'    : ''
+      'contClass'    : '',
+
+      // Start loading/rendering after...
+      'renderStartDelay'  :  50, // ms
+
+      // Load images by batch of...
+      'renderBatchSize'   :  10, // #images
+
+      // Pause in between batches
+      'renderBatchPause'  : 200  // ms
     };
+
+    var queue = [];
     
     // If options exist, lets merge them
     // with our default settings
@@ -42,25 +54,47 @@
       $.extend( settings, options );
     }    
 
-    return this.each( function() {        
-      // ----------------
-      // MAIN PLUGIN CODE
-      // ----------------
-      var $this   = $(this), // Image object
-          realSrc = $this.attr( "realsrc" ) || $this.attr( "src" );
-          
-      // Check config consistency
-      if ( !settings.crop && !realSrc ) {
-        return; // Nothing to do
-      }
- 
-      // Create temp image and load it
-      var img  = $( document.createElement('img') );
-      img.bind( "load", { img: this }, _onload ); // Important: We pass the DOM img objet, not the jQ one
-      img.attr( "src", realSrc );
+    this.each( function() {        
+      queue.push( this ); // Defer loading
     });
+    setTimeout( _run, settings.renderStartDelay || 0 ); // Start loading images
+    return this;
+
+    /**
+     * Bind images a batch at a time
+     */
+    function _run() {
+      var max = settings.renderBatchSize || queue.length, // If batch size is 0, render the whole queue in one pass
+          i = 0;
+      for( ; i < max && queue.length; i++ ) {
+        _bindImage( queue.shift() );
+      }
+      if ( queue.length ) {
+        setTimeout( _run, settings.renderBatchPause || 0 );
+      }
+    }
+
+    /**
+     * Bind an IMG element to the loader & triggers the actual load.
+     * @param {DOM Element} imgEl <img> element detected in the DOM tree and that needs to be "loaded", resized and cropped.
+     * @param 
+     */
+    function _bindImage( imgEl ) {
+      var $img    = $(imgEl),
+          realSrc = $img.attr( "realsrc" ) || $img.attr( "src" );
+      if ( !realSrc ) return;
+      var newImg  = $( document.createElement('img') ); // Temp image, not yet connectd to DOM
+      newImg.bind( "load", { img: imgEl }, _onload );   // Important: We pass the DOM img objet, not the jQ one
+      newImg.attr( "src", realSrc ); // Load image (in the background -- not visible yet)
+    }
     
-    // Where the magic happens
+    /**
+     * Where the magic happens: once an image has successfully loaded (or failed), it is resized/cropped (of needed)
+     * and the temp DOM img element used for the loading is swapped with the DOM img element that was originally
+     * in the HTML source.
+     * @param {DOM Event} e DOM event. Its payload contains e.img (original DOM img element in the HTML source while 'this'
+     * points to the temp DOM img element used for the loading.)
+     */
     function _onload( e ) {
       // Notes on image elements used below:
       //   'this'   is a DOM image object, it's a temporary IMG element that serves to load the desired image.
