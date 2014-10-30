@@ -5,7 +5,7 @@
 
   <!-- Stylesheet below needed to use Plugin -->
   <link rel="stylesheet" type="text/css" href="../src/jquery.resizeandcrop.css"></link>
-  
+
   <style>
   /* For testing purposes: styles below not needed to use plugin */
   .sq220 { width: 220px; height: 220px; }
@@ -19,11 +19,17 @@
   table.params th { background-color: #eee; border-bottom: 1px solid #161; text-align: left; padding: 0 4px; }
   table.params td { line-height: 1.2; vertical-align: top; padding: 4px; }
   table.params:last-child { border-bottom: 1px solid #161; }
+  .img-cont { display: inline-block; border: 2px solid transparent; }
+  .img-cont > div.resize-and-crop { display: block; } /* to avoid extra bottom spacing */
+  .hi { border-color: #f00 !important;}
+  img { border: none; padding: none; margin: none;}
   </style>
 
 </head>
 <body>
 <h2>jquery.resizeAndCrop() plugin</h2>
+
+<div class="img-cont"><img src="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" height="96"></div><div class="img-cont"><img src="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" ></div>
 
 <table><tr style="vertical-align:top"><td>
 <h3>Original images resized to 96px</h3>
@@ -39,11 +45,21 @@
 <img src="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
 </td><td>
 <h3>With plugin: placeholder + 96x96 resize/crop + center</h3>
-<img class="test" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96">
-<img class="test" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
-<img class="test" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
-<img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
-<img class="test" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
+<div>
+<div class="img-cont first"><img class="test" src="blank_avatar_220.png" realsrc="https://si0.twimg.com/profile_images/1241449565/mikaelgrave-v2.jpg" width="96" height="96"></div>
+<div class="img-cont">
+  <img class="test" src="blank_avatar_220.png" realsrc="http://media-cache-ec1.pinterest.com/avatars/mmarquit-1356024832_600.jpg" width="96" height="96">
+</div>
+<div class="img-cont">
+  <img class="test" src="blank_avatar_220.png" realsrc="http://si0.twimg.com/profile_images/2122692888/Screen_shot_2012-04-14_at_5.56.23_PM.png" width="96"  height="96">
+</div>
+<div class="img-cont">
+  <img class="test" src="blank_avatar_220.png" realsrc="http://mdcarroll.com/wp-content/uploads/2009/09/Aaron-Carroll2-199x300.jpg" width="96" height="96">
+</div>
+<div class="img-cont">
+  <img class="test" src="blank_avatar_220.png" realsrc="http://a3.twimg.com/profile_images/64119495/rje_bigger.jpg" width="96" height="96">
+</div>
+</div>
 <div>Placeholder shows first then resized+cropped image replaces it.<br>
 <i>Note: 5th image is invalid (returns error message) and shows the placeholder</div>
 </td></tr></table>
@@ -66,7 +82,7 @@
 
 <h3>For more realistic simulation, click on left link below</h3>
 <div>
-<a href="javascript:reload( 2000 )">Reload with simulated image load delay</a> | 
+<a href="javascript:reload( 2000 )">Reload with simulated image load delay</a> |
 <a href="javascript:reload( 0 )">Reload with cached images (no delay)</a>
 </div>
 
@@ -134,7 +150,7 @@ if ( m = window.location.search.match( /delay=(\d+)/ ) ) {
 }
 
 // Highlight image border to make crop effect more visible
-$('img').addClass( 'highlight' );
+// $('img').addClass( 'highlight' );
 
 // Where the plugin gets actually called...
 function init() {
@@ -142,21 +158,25 @@ function init() {
   // --
   // Using default config (good for most usages)
   $("img.test").resizeAndCrop();
-  
+
+
   // Passing some optional config paramters
   $("img.test2").resizeAndCrop( { preserveSize: true } );
-  
+
   // Use plugin to lazy load images (without cropping)
   $("img.test3").resizeAndCrop( { crop: false } );
-  
+
   // For small images to be expanded to placeholder's size
   $("img.test4").resizeAndCrop( { forceResize: true } );
-  
+
   // Set size of hidden images
   $("img.test5").resizeAndCrop( { width: 80, height: 80 } );
-  
+
   // Resize & crop, but do not center cropped images
   $("img.nocenter").resizeAndCrop( { center: false } );
+
+  // Highlight the container element of a resized image
+  setTimeout( function() { $( ".first" ).addClass( "hi" ); }, 2000 );
 }
 
 // Handle links to reload the page with or without simulated image-load delay

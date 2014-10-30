@@ -5,7 +5,7 @@
 
 (function( $ ){
 
-  $.fn.resizeAndCrop = function( options ) {  
+  $.fn.resizeAndCrop = function( options ) {
 
     // Supported configuration parameters
     var settings = {
@@ -13,24 +13,24 @@
       // (0=inherit from placeholder img element)
       'width'        : 0,
       'height'       : 0,
-      
+
       // Crop resulting image?
       'crop'         : true,
-      
+
       // Center when cropping?
       'center'       : true,
-      
+
       // Smart crop+center mode?,
       'smart'        : true,
-      
+
       // If the original image is too small to fit
       // the wished sized, do we make it float
       // within a larger container?
       'preserveSize' : false,
-      
+
       // Force small images to be resized?
       'forceResize' : false,
-      
+
       // Optional classes for resulting img element
       // and div container element
       'imgClass'     : '',
@@ -47,14 +47,14 @@
     };
 
     var queue = [];
-    
+
     // If options exist, lets merge them
     // with our default settings
-    if ( options ) { 
+    if ( options ) {
       $.extend( settings, options );
-    }    
+    }
 
-    this.each( function() {        
+    this.each( function() {
       queue.push( this ); // Defer loading
     });
     setTimeout( _run, settings.renderStartDelay || 0 ); // Start loading images
@@ -77,7 +77,7 @@
     /**
      * Bind an IMG element to the loader & triggers the actual load.
      * @param {DOM Element} imgEl <img> element detected in the DOM tree and that needs to be "loaded", resized and cropped.
-     * @param 
+     * @param
      */
     function _bindImage( imgEl ) {
       var $img    = $(imgEl),
@@ -85,9 +85,19 @@
       if ( !realSrc ) return;
       var newImg  = $( document.createElement('img') ); // Temp image, not yet connectd to DOM
       newImg.bind( "load", { img: imgEl }, _onload );   // Important: We pass the DOM img objet, not the jQ one
+
+      //carry over alt and title if they exist
+      var altStr, titleStr;
+      if (typeof (altStr = $img.attr('alt')) !== 'undefined') {
+         newImg.attr( "alt", altStr );
+      }
+      if (typeof (titleStr = $img.attr('title')) !== 'undefined') {
+         newImg.attr( "title", titleStr );
+      }
+
       newImg.attr( "src", realSrc ); // Load image (in the background -- not visible yet)
     }
-    
+
     /**
      * Where the magic happens: once an image has successfully loaded (or failed), it is resized/cropped (of needed)
      * and the temp DOM img element used for the loading is swapped with the DOM img element that was originally
@@ -120,13 +130,13 @@
       if ( !origW || !origH ) {
         return; // Invalid, do nothing
       }
-                    
+
       // No-crop mode, same dimensions: just act as a deferred loader
       if ( !settings.crop && reqW == origW && reqH == origH ) {
         $curImg.attr( "src", $origImg.attr( "src" ) );
         return; // Done!
       }
-      
+
       // Resize image
       if ( cropW * origH < cropH * origW ) {
         this.width = Math.round( origW * cropH / origH );
@@ -135,12 +145,12 @@
         this.width = cropW;
         this.height = Math.round( origH * cropW / origW );
       }
-      
+
       // Style it
       if ( settings.imgClass ) {
         $origImg.addClass( settings.imgClass );
       }
-            
+
       if ( !settings.crop ) {
         $curImg.replaceWith( $origImg ); // Swap nodes
         return;
@@ -166,15 +176,15 @@
           }
         }
       }
-      
+
       // Style it
       if ( settings.contClass ) {
         cont.addClass( settings.contClass );
       }
-      
+
       // Insert image into container
       cont.append( $origImg );
-      
+
       // Swap nodes
       $curImg.replaceWith( cont );
     }
