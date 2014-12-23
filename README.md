@@ -1,82 +1,147 @@
-# resizeAndCrop
+# jQuery Resize and Crop Plugin
 
-## Overview
+Resize and crop images on the fly, while preserving their aspect ratio. A placeholder image is used initially; the
+actual image loading, cropping and resizing happens in the background. Optimized for rendering hundreds of images on
+the same page without blocking the browser event loop; images are loaded in batches with a pause in between each batch.
+This maximizes UI responsiveness while ensuring image loading is not blocking AJAX calls.
 
-**jQuery plugin** to resize and crop images on the fly, while preserving their aspect ratio. A placeholder first shows and the actual image loading, cropping and resizing happens in the background. Optimized for rendering hundreds of images on the same page: images are loaded in batch with a pause in between each batch. This maximizes UI responsiveness while ensuring image loading is not blocking ajax calls.
+## Installation Via bower
 
-## Plugin Usage
+	bower install jquery-resizeandcrop
 
-Include `jquery.resizeandcrop.css` and `jquery.resizeandcrop.js`</a> files.
+## Usage
 
-Then call the plugin on any image using standard jQuery call. For example:
+Include `jquery.resizeandcrop.css` and `jquery.resizeandcrop.js` files on the page and call the plugin on any image:
 
-	$('img.cropme').resizeAndCrop();
+	<html>
+		<head>
+			<link rel="stylesheet" type="text/css" href="jquery.resizeandcrop.css">
+		</head>
+		<body>
+			<img class="crop-me" src="placeholder.png" realsrc="imagetoloadandcrop.png" />
+			<script type="text/javascript" src="jquery.resizeandcrop.js"></script>
+			<script>
+				$("img.crop-me").resizeAndCrop();
+			</script>
+		</body>
+	</html>
 
-If you want a placeholder to be display while the original image gets loaded and cropped, use the `realsrc` attribute of the `<img>` tag:
+In the above example, the `placeholder.png` image will display, while the image in the `realsrc` attribute of the `<img>`
+tag gets loaded, resized, and cropped. The image will be resized to match the size of `placeholder.png` by default, but
+you can override this by specifying the size in the `<img>` tag via a CSS class, in-line CSS style, or `width` / `height`
+attributes:
 
-	<img src="placeholder.png" realsrc="imagetoloadandcrop.png">
+	<img src="placeholder.png" realsrc="imagetoloadandcrop.png" style="width: 200px; height: 200px;">
 
-The image will be resized at the size of the placeholder or whatever size you specify in the `<img>` tag (via a class or `width`/`height` attributes):
+By default, if the original image is smaller than the placeholder, it won't get resized. You can change this by setting
+`forceResize` to `true`. The full list of options are below.
 
-	<img src="placeholder.png" realsrc="imagetoloadandcrop.png" style="width:200px;height:200px;">
+Several examples of using the plugin can be found in the `examples/index.html` file.
 
-By default, if the original image is smaller than the placeholder, it won't get resized. You can change this by setting `forceResize` to `true`. See other possible options below.
+## Options
 
-The plugin is optimized to operate on hundreds of images without blocking the browser event loop. Images are processed in small chunks.
-
-## Optional Parameters
-
-You can pass special optional parameters when call the plugin. Parameters are passed as a key-value object to `resizeAndCrop()`. For example:
+The plugin sets options via a key-value object parameter:
 
 	$('img.cropme').resizeAndCrop( { center: false, imgClass: "foo" } );
 
 
-Supported keys and values are:
+Available Options:
 
-### `width` (integer)
- 
-To force width of resized image to another value than placeholder's width (default).
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default Value</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>`width`</td>
+			<td>integer</td>
+			<td>Width of the placeholder image</td>
+			<td>Force the width of resized image to this value.</td>
+		</tr>
+		<tr>
+			<td>`height`</td>
+			<td>integer</td>
+			<td>Height of the placeholder image</td>
+			<td>Force the height of the resized image to this value.</td>
+		</tr>
+		<tr>
+			<td>`preserveSize`</td>
+			<td>boolean</td>
+			<td>`false`</td>
+			<td>If the original image is smaller than the placeholder, preserve the space occupied by the placeholder
+			and make the image float in its left-top corner.</td>
+		</tr>
+		<tr>
+			<td>`forceResize`</td>
+			<td>boolean</td>
+			<td>`false`</td>
+			<td>If the original image is smaller than the placeholder, enlarge it to fit the placeholder (it can make
+			it blurry).</td>
+		</tr>
+		<tr>
+			<td>`crop`</td>
+			<td>boolean</td>
+			<td>`true`</td>
+			<td>When `false`, only resize the image (if needed), do not crop it. That means the image might get
+			distorted if the aspect ratio of the original image is different from the aspect ratio of the placeholder.
+			It also allows for using this plugin as a simple image loader (deferred loading).</td>
+		</tr>
+		<tr>
+			<td>`center`</td>
+			<td>boolean</td>
+			<td>`true`</td>
+			<td>When `true`, the cropped portion of the image is centered. If you set it to `false`, the cropped portion
+			is always the top-left part of the image.</td>
+		</tr>
+		<tr>
+			<td>`smart`</td>
+			<td>boolean</td>
+			<td>`true`</td>
+			<td>Only applicable when `center` is set to `true` (default). The vertical centering is optimized for
+			people's portraits. If the height/width ratio is bigger than 1.2, the vertical centering is disabled and
+			the centering only applies horizontally. This option is intended to be used when you expect photos that
+			could be medium closeups or full shot portrait (head, body and feet) because the head is usually in the top
+			part of the picture and vertically centering does not work well.</td>
+		</tr>
+		<tr>
+			<td>`imgClass`</td>
+			<td>string</td>
+			<td></td>
+			<td>Optional class to add to the `<img>` element showing the resized and cropped image.</td>
+		</tr>
+		<tr>
+			<td>`contClass`</td>
+			<td>string</td>
+			<td></td>
+			<td>Optional class to add to the `<div>` element that acts as a container for the `<img>` element showing the resized and cropped image.</td>
+		</tr>
+		<tr>
+			<td>`renderStartDelay`</td>
+			<td>integer</td>
+			<td>50</td>
+			<td>Time in milliseconds to delay before loading/rendering images. Set to zero to immediately load/render images.</td>
+		</tr>
+		<tr>
+			<td>`renderBatchSize`</td>
+			<td>integer</td>
+			<td>10</td>
+			<td>Number of images to load at once. The event loop is freed up after each batch to maximize UI responsiveness.</td>
+		</tr>
+		<tr>
+			<td>`renderBatchPause`</td>
+			<td>integer</td>
+			<td>200</td>
+			<td>Time in milliseconds to pause before processing the next batch of images. It is important to have big
+			enough pause when you load large sets of images, otherwise the UI may become very unresponsive.</td>
+		</tr>
+	</tbody>
+</table>
 
-### `height` (integer)
- 
-To force height of resized image to another value than placeholder's height (default).
+## License
 
-### `preserveSize` (boolean)
-
-If the original image is smaller than the placeholder, preserve the space occupied by the placeholder and make the image float in its left-top corner. Default is `false`.
-
-### `forceResize` (boolean)
-
-If the original image is smaller than the placeholder, enlarge it to fit the placeholder (it can make it blurry).  Default is `false`.
-
-### `crop` (boolean)
-
-When `false`, only resize the image (if needed), do not crop it. That means the image might get distorded if the aspect ratio of the original image is different from the aspect ratio of the placeholder. It also allows for using this plugin as a simple image loader (deferred loading). Default is `true`.
-
-### `center` (boolean)
-
-When `true`, the cropped portion of the image is centered. This is the default behavior. If you set it to `false`, the cropped portion is always the top-left part of the image. Default is `true`.
-
-### `smart` (boolean)
-
-Only applicable when `center` is set to `true` (default). The vertical centering is optimized for people's portraits. If the height/width ratio is bigger than 1.2, the vertical centering is disabled and the centering only applies horizontally. This option is intended to be used when you expect photos that could be medium closeups or full shot portrait (head, body and feet) because the head is usually in the top part of the picture and vertically centering does not work well. Default is `true`.
-
-### `imgClass` (string)
-
-Optional class to add to the `<img>` element showing the resized and cropped image. No default value.
-
-### `contClass` (string)
-
-Optional class to add to the `<div>` element that acts as a container for the `<img>` element showing the resized and cropped image. No default value.
-
-### `renderStartDelay` (integer)
-
-In milliseconds. Start loading/rendering after this initial delay. Set to zero for no delay. Default it 50ms.
-
-### `renderBatchSize` (integer)
-
-Number of images to load at once. The event loop is free'ed up after each batch to maximize UI responsiveness. Default is 10.
-
-### `renderBatchPause` (integer)
-
-In milliseconds. Pause before processing next batch of images. Important to have big enough pauses when you load large sets of images, otherwise the UI may become very unresponsive/jerky. Default is 200ms.
+Copyright (c) 2013 Traackr Licensed under the MIT license.
