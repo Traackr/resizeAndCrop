@@ -1,7 +1,9 @@
- /*
-  * jQuery Plugin - Resize and Crop - v0.3 - JS
-  * Traackr / MG / Aug 27, 2013
-  */
+/**
+ * jQuery Plugin - Resize and Crop
+ * Version: 0.4.0
+ * Contributor(s): Mikaël Gravé, Luis Cruz
+ * License: Copyright (c) 2013 Traackr Licensed under the MIT license.
+ */
 
 (function( $ ){
 
@@ -83,8 +85,8 @@
       var $img    = $(imgEl),
           realSrc = $img.attr( "realsrc" ) || $img.attr( "src" );
       if ( !realSrc ) return;
-      var newImg  = $( document.createElement('img') ); // Temp image, not yet connectd to DOM
-      newImg.bind( "load", { img: imgEl }, _onload );   // Important: We pass the DOM img objet, not the jQ one
+      var newImg  = $( document.createElement('img') ); // Temp image, not yet connected to DOM
+      newImg.bind( "load", { img: imgEl }, _onload );   // Important: We pass the DOM img objcet, not the jQ one
 
       //carry over alt and title if they exist
       var altStr, titleStr;
