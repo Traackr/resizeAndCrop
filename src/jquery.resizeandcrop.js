@@ -122,8 +122,8 @@
           origH   = this.height,
           curImg  = e.data.img, // Current placeholder image in markup (DOM object)
           $curImg = $(curImg),  // Current placeholder image in markup (jQuery object)
-          reqW    = settings.width  || curImg.width,  // Requested width (do not use $curImg.width()!)
-          reqH    = settings.height || curImg.height, // Requested height
+          reqW    = settings.width  || parseInt($(curImg).css("width")) || curImg.width,  // Requested width (do not use $curImg.width()!)
+          reqH    = settings.height || parseInt($(curImg).css("height")) || curImg.height, // Requested height
           cropW   = settings.forceResize ? reqW : Math.min( origW, reqW ), // What it will finally be...
           cropH   = settings.forceResize ? reqH : Math.min( origH, reqH ),
           cont; // Encapsulating <div>
