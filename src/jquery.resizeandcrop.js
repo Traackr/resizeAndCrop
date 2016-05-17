@@ -192,21 +192,21 @@
 
       // Original image (natural size), temp node
       var $origImg = $(this),
-      // Can't use origImg.width() because not visible
+          // Can't use origImg.width() because not visible
           origW = this.width,
           origH = this.height,
-      // Current placeholder image in markup (DOM object)
+          // Current placeholder image in markup (DOM object)
           curImg = e.data.img,
-      // Current placeholder image in markup (jQuery object)
+          // Current placeholder image in markup (jQuery object)
           $curImg = $(curImg),
-      // Requested width (do not use $curImg.width()!)
+          // Requested width (do not use $curImg.width()!)
           reqW = settings.width || parseInt($(curImg).css("width")) || curImg.width,
-      // Requested height
+          // Requested height
           reqH = settings.height || parseInt($(curImg).css("height")) || curImg.height,
-      // What it will finally be...
+          // What it will finally be...
           cropW = settings.forceResize ? reqW : Math.min(origW, reqW),
           cropH = settings.forceResize ? reqH : Math.min(origH, reqH),
-      // Encapsulating <div>
+          // Encapsulating <div>
           cont;
 
       // Check loaded image is valid
