@@ -1,0 +1,11 @@
+{
+    "name": "resizeAndCrop",
+    "version": "1.0.0",
+    "description": "jQuery plugin to resize and crop images while preserving aspect ratio. Can also be used for lazy image loading and improving UI responsiveness when displaying lots of images.",
+    "url": "https://github.com/Traackr/resizeAndCrop",
+    "main": "src/jquery.resizeandcrop.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Traackr/resizeAndCrop"
+    }
+}
