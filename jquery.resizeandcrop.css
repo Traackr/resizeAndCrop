@@ -1,0 +1,17 @@
+ /*
+  * jQuery Plugin - Resize and Crop - v0.2 - CSS
+  */
+
+div.resize-and-crop {
+  overflow: hidden;
+  display: -moz-inline-block; /* FF2 */
+  display: inline-block;
+  *display: inline; /* IE6&7 */
+  *zoom: 1; /* IE6&7: give hasLayout property */
+  /*vertical-align: top;*/ /* was added for Webkit but HAS SIDE EFFECTS */
+  position: relative; /* important for absolute pos of child img */
+}
+
+div.resize-and-crop img {
+  position: absolute;
+}
